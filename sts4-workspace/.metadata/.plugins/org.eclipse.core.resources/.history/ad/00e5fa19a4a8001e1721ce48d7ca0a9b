@@ -1,0 +1,17 @@
+package com.example.study.Service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.study.Entity.Question;
+import com.example.study.Repository.AnswerRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class AnswerService {
+	
+	private final AnswerRepository answerRepository;
+	
+	public void create(Question question, String content)
+}

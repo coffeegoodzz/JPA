@@ -1,0 +1,23 @@
+package com.example.study;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import Entity.Question;
+import Repository.QuestionRepository;
+
+@SpringBootTest
+class StudyApplicationTests {
+	
+	@Autowired
+	private QuestionRepository questionRepository;
+
+	@Test
+	void testJpa() {
+		Question q1 = new Question();
+		
+		q1.setSubject("sbb가 무엇인가요?");
+	}
+
+}

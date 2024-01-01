@@ -1,0 +1,9 @@
+package Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import Entity.Answer;
+
+public interface AnswerRepository extends JpaRepository<Answer, Integer> {
+	
+}

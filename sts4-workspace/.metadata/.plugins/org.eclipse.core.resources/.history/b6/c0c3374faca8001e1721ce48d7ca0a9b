@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<h1 th:text="${question.subject}"></h1>
+	<div th:text="${question.content}"></div>
+
+    <h5 th:text="|${#lists.size(question.answersList)}개의 답변이 있습니다.|"></h5> <!-- #lists.size 타임리프가 제공하는 객체 길이 반환-->
+    <div>
+        <ul>
+            <li th:each="answer : ${question.answersList}">[[${answer.content}]]</li>
+        </ul>
+    </div>
+
+    <form th:action="@{|/answer/create/${question.id}|}" method="post">
+        <textarea name="content" id="content" rows="15"></textarea>
+        <input type="submit" value="답변등록">
+    </form>
+</body>
+</html>

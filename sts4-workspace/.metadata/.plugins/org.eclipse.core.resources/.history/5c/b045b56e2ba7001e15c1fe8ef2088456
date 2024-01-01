@@ -1,0 +1,13 @@
+package com.example.demo;
+
+public class test2 {
+	
+	private String name;
+	private int age;
+	
+	public static void main(String[] args) {
+		test2 test2 = new test2();
+		
+		
+	}
+}
