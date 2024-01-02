@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>질문 등록하기</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">study</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#">로그인</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- 네비바 -->
+    <div class="container">
+        <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+        <form th:action="@{/question/create}" th:object="${questionDto}" method="post">
+			<div th:replace="~{form_error :: formErrorFragment}"></div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">제목</label>
+                <input type="text" th:field="*{subject}" class="form-control"> <!-- th:field -> id,name,value 속성이 모두 자동 생성,타임리프가 value에 기존 값을 채움 -->
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">내용</label>
+                <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+            </div>
+            <input type="submit" value="등록하기" class="btn btn-primary my-2">
+        </form>
+    </div>
+</body>
+</html>

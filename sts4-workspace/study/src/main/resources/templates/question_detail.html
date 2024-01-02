@@ -9,6 +9,11 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+	<th:block th:insert="~{nav_fragment::nav_a}">
+
+	</th:block>
+	<!-- 네비바 -->
+	
     <!-- 질문 -->
     <div class="container my-3">
         <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
@@ -42,11 +47,11 @@
 
     <!-- 답변 작성 -->
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerDto}" method="post" class="my-3">
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}"> <!-- 검증에 실패할 경우 오류메세지 출력하도록 -->
-            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
-        </div>
+        <div th:replace="~{form_error :: formErrorFragment}"></div>
         <textarea th:field="*{content}" rows="10" class="form-control"></textarea>
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
+    
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
