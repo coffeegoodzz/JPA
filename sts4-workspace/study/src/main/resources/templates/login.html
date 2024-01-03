@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/section.css}">
+</head>
+<body>
+	<th:block th:insert="~{nav_fragment::nav_a}">
+
+	</th:block>
+	<!-- 네비바 -->
+	
+	<section class="section-content">
+		<div class="my-3 border-bottom">
+        	<div>
+            	<h4>로그인</h4>
+        	</div>
+    	</div>
+		<div class="container my-3">
+            <form th:action="@{/user/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+						<!-- 로그인 실패시 파라미터로 error가 전달 되는 것은 security의 규칙이다.-->
+                        아이디 또는 비밀번호를 확인해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">아이디</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">로그인</button>
+            </form>
+        </div>
+	</section>                 
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

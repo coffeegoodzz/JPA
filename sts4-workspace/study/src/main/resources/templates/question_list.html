@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>목록</title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -28,8 +29,10 @@
 			<tbody>
 				<tr th:each="q, loop : ${paging}">
 					<td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+					<!-- 번호 = 전체게시물 - (현재페이지 * 페이지 당 게시물 개수) - 나열된 인덱스 -->
 					<td>
 						<a th:href="@{|/question/detail/${q.id}|}">[[${q.subject}]]</a>
+						<span class="text-danger small ms-2" th:if="${#lists.size(q.answersList) > 0}">([[${#lists.size(q.answersList)}]])</span>
 					</td>
 					<td th:text="${#temporals.format(q.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 					<!--temporals.format(날짜객체,날짜포멧) 변환-->

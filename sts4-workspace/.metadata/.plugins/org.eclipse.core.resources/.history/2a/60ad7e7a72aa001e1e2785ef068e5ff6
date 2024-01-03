@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+	<th:block th:insert="~{nav_fragment::nav_a}">
+
+	</th:block>
+	<!-- 네비바 -->
+	<div></div>
+    
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

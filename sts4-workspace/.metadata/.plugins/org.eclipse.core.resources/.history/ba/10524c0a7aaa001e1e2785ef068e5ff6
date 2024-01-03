@@ -1,0 +1,29 @@
+package com.example.study.config;
+
+import java.util.Optional;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.study.Entity.SiteUser;
+import com.example.study.Repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class UserSecurityService implements UserDetailsService {
+	
+	private final UserRepository userRepository;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		Optional<SiteUser> siteUser = this.userRepository.findByusername(username);
+		
+		return null;
+	}
+
+}

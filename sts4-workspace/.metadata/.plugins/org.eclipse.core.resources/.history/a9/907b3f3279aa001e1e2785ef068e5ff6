@@ -1,0 +1,9 @@
+package com.example.study.config;
+
+import lombok.Getter;
+
+@Getter
+public enum UserRole {
+	ADMIN("ROLE_ADMIN"),
+	USER("ROLE_USER")
+}

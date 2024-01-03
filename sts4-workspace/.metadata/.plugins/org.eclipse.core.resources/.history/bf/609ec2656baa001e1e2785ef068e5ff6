@@ -1,0 +1,10 @@
+package com.example.study.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@Configuration // 스프링의 환경설정 파일 security 설정을 위해 사용
+@EnableWebSecurity
+public class SecurityConfig {
+
+}
