@@ -1,0 +1,6 @@
+
+let delete_elements = document.querySelector(".delete");
+
+Array.from(delete_elements).forEach(() => {
+	
+})

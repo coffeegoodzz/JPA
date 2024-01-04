@@ -1,0 +1,8 @@
+package com.example.study.config;
+
+import lombok.Getter;
+
+@Getter
+public class UserAdapter {
+
+}

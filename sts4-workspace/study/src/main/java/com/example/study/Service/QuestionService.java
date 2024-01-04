@@ -1,5 +1,6 @@
 package com.example.study.Service;
 
+import java.lang.StackWalker.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.study.DataNotFoundException;
 import com.example.study.Entity.Question;
+import com.example.study.Entity.SiteUser;
 import com.example.study.Repository.QuestionRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -37,14 +39,27 @@ public class QuestionService {
 			throw new DataNotFoundException("question not found");
 		}
 	}
-	
-	public void create(String subject, String content) {
+	// 생성
+	public void create(String subject, String content, SiteUser user) {
 		Question q = new Question();
 		
 		q.setSubject(subject);
 		q.setContent(content);
 		q.setCreateDate(LocalDateTime.now());
+		q.setAuthor(user);
 		this.questionRepository.save(q);
+	}
+	// 수정
+	public void modify(Question question, String subject, String content) {
+		
+		question.setSubject(subject);
+		question.setContent(content);
+		question.setModifyDate(LocalDateTime.now());
+		this.questionRepository.save(question);
+	}
+	// 삭제
+	public void delete(Question question) {
+		this.questionRepository.delete(question);
 	}
 	
 	// 페이징 처리 메소드
@@ -58,4 +73,9 @@ public class QuestionService {
 		return this.questionRepository.findAll(pageable);
 	}
 	
+	public long totalCount() {
+		long count = this.questionRepository.count();
+		
+		return count;
+	}
 }

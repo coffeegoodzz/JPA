@@ -1,0 +1,15 @@
+package com.example.study.config;
+
+import com.example.study.Entity.SiteUser;
+
+import lombok.Getter;
+
+@Getter
+public class UserAdapter extends SiteUser {
+	
+	private SiteUser siteUser;
+	
+	public UserAdapter(SiteUser siteUser) {
+		
+	}
+}
