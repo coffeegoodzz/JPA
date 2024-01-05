@@ -2,15 +2,19 @@ package com.example.study.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,7 @@ import com.example.study.Service.QuestionService;
 import com.example.study.Service.UserService;
 import com.example.study.dto.AnswerDto;
 import com.example.study.dto.QuestionDto;
+import com.example.study.dto.UserDto;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;

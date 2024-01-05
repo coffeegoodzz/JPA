@@ -24,7 +24,7 @@
                     <div class="d-flex justify-content-end">
                         <div class="badge bg-light text-dark p-2 text-start">
 							<div class="mb-2">
-								<span th:if="${question.author != null}">[[${question.author.username}]]</span>
+								<span th:if="${question.author != null}">작성자 : [[${question.author.username}]]</span>
 							</div>
                             <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                         </div>
@@ -36,7 +36,7 @@
 						 and #authentication.getPrincipal().getUsername() == question.author.username}" th:text="수정">
 						</a>
 						
-						<a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}" 
+						<a href="#" th:data-uri="@{|/question/delete/${question.id}|}" th:onclick="deleteWrite([[${question.id}]])"
 						class="delete btn btn-sm btn-outline-secondary" id="delete-btn" sec:authorize="isAuthenticated()"
 						 th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}" 
 						 th:text="삭제">
@@ -56,7 +56,7 @@
                 <div class="d-flex justify-content-end">
                     <div class="badge bg-light text-dark p-2 text-start">
 						<div class="mb-2">
-							<span th:if="${answer.author != null}">[[${answer.author.username}]]</span>
+							<span th:if="${answer.author != null}">작성자 : [[${answer.author.username}]]</span>
 						</div>
                         <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                     </div>
@@ -76,16 +76,12 @@
 
     
     <script th:src="@{/js/bootstrap.min.js}"></script>
-	<script type="text/javascript">
-		let delete_elements = document.querySelector("#delete-btn");
-
-		Array.from(delete_elements).forEach(function(ele) {
-			ele.addEventListener('click', function(){
-				if(confirm("해당 게시글을 삭제하시겠습니까?")) {
-					location.href = this.dataset.uri;
-				};
-			});
-		});
+	<script>
+		function deleteWrite(id) {
+			if(confirm("해당 게시글을 삭제하시겠습니까?")) {
+				location.href = "/question/delete/"+id;
+			};
+		}
 	</script>
 </body>
 </html>

@@ -28,6 +28,12 @@
 					</li>
 				</ul>
 			</div>
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<span class="user-info" sec:authorize="isAnonymous()"></span>
+					<span class="user-info" sec:authorize="isAuthenticated()">사용자 : [[${#authentication.name}]]</span>
+				</li>
+			</ul>
 		</div>
 	</nav>
 </th:block>

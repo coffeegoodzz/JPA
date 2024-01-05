@@ -1,5 +1,6 @@
 package com.example.study.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.study.DataNotFoundException;
 import com.example.study.Entity.SiteUser;
 import com.example.study.Repository.UserRepository;
+import com.example.study.dto.UserDto;
 
 import lombok.RequiredArgsConstructor;
 

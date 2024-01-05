@@ -1,0 +1,9 @@
+
+.total-count {
+	font-weight: bold;
+}
+
+.user-info {
+	padding: 8px;
+	display: flex;
+}

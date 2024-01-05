@@ -1,0 +1,13 @@
+
+.total-count {
+	font-weight: bold;
+}
+
+.user-info {
+	padding: 8px;
+	margin-right: 10px;
+	text-align: right;
+	
+	display: flex;
+	justify-content: end;
+}
