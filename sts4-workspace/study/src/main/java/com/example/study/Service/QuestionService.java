@@ -10,13 +10,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.study.DataNotFoundException;
+import com.example.study.Entity.Answer;
 import com.example.study.Entity.Question;
 import com.example.study.Entity.SiteUser;
 import com.example.study.Repository.QuestionRepository;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -63,19 +71,40 @@ public class QuestionService {
 	}
 	
 	// 페이징 처리 메소드
-	public Page<Question> getPageList(int page) {
+	public Page<Question> getPageList(int page, String keyword) {
 		
 		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("createDate")); // 작성일시 외에 추가로 정렬 조건이 필요한 경우에는 sorts 리스트에 추가하면 됨
 		
 		Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts)); // 조회 할 페이지의 번호, 한 페이지에 보여줄 게시물의 갯수, 역순 조회
+		Specification<Question> spec = search(keyword);
 		
-		return this.questionRepository.findAll(pageable);
+		return this.questionRepository.findAll(spec,pageable);
 	}
 	
 	public long totalCount() {
 		long count = this.questionRepository.count();
 		
 		return count;
+	}
+	
+	private Specification<Question> search(String keyword) {
+		return new Specification<>() {
+			
+			@Override
+			public Predicate toPredicate(Root<Question> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				
+				query.distinct(true); // 중복제거
+				Join<Question, SiteUser> u1 = root.join("author", JoinType.LEFT);
+				Join<Question, Answer> a = root.join("answersList", JoinType.LEFT);
+				Join<Answer, SiteUser> u2 = root.join("author", JoinType.LEFT);
+				
+				return cb.or(cb.like(root.get("subject"),"%" + keyword + "%"), // 제목
+						cb.like(root.get("content"), "%" + keyword + "%"), // 내용
+						cb.like(u1.get("username"), "%" + keyword + "%"), // 질문자 이름
+						cb.like(a.get("content"), "%" + keyword + "%"), // 답변자 내용
+						cb.like(u2.get("username"), "%" + keyword + "%")); // 답변자 이름
+			}
+		};
 	}
 }

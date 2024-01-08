@@ -1,0 +1,14 @@
+
+.total-count {
+	font-weight: bold;
+}
+
+.user-info {
+	padding: 8px;
+	display: flex;
+	margin-right: 30px;
+}
+
+.cnt-search {
+	display: flex;
+}

@@ -43,13 +43,14 @@ public class QuestionController {
 	private final UserService userService;
 	
 	@GetMapping("/list")
-	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 		
-		Page<Question> paging = this.questionService.getPageList(page);
+		Page<Question> paging = this.questionService.getPageList(page,keyword);
 		Long count = this.questionService.totalCount();
 		
 		model.addAttribute("count", count);
 		model.addAttribute("paging", paging);
+		model.addAttribute("kw",keyword); // 입력한 검색어를 화면에 그대로 유지하기 위해 사용
 		
 		return "question_list";
 	}
